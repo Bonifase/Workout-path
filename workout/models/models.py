@@ -1,11 +1,9 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from workout import db, app
 
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 
-app = Flask(__name__)
-db = SQLAlchemy(app)
 
 migate = Migrate(app, db)
 manager = Manager(app)
