@@ -19,7 +19,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.11/css/mdb.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -32,7 +32,7 @@
             <div class="container">
 
                 <!-- Navbar brand -->
-                <a class="navbar-brand" href="#">Workout Path</a>
+                <a class="navbar-brand" href="#">Fitness Path</a>
 
                 <!-- Collapse button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
@@ -84,7 +84,7 @@
         <!--/.Navbar-->
 
         <!--Mask-->
-        <div id="intro" class="view">
+        <div id="intro" class="view" background="{{ url_for('static', filename='img/showcase.jpg') }}">
 
             <div class="mask rgba-black-strong">
 
@@ -149,27 +149,24 @@
                     <!--Grid column-->
                     <div class="col-md-4 mb-5">
                         <i class="fa fa-camera-retro fa-4x orange-text"></i>
-                        <h4 class="my-4 font-weight-bold">Experience</h4>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
-                            assumenda deleniti hic.</p>
+                        <h4 class="my-4 font-weight-bold">Train better.</h4>
+                        <p class="grey-text">Learn how to make the most out of your training with our proven programming framework, session notes and movement options.</p>
                     </div>
                     <!--Grid column-->
 
                     <!--Grid column-->
                     <div class="col-md-4 mb-1">
                         <i class="fa fa-heart fa-4x orange-text"></i>
-                        <h4 class="my-4 font-weight-bold">Happiness</h4>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
-                            assumenda deleniti hic.</p>
+                        <h4 class="my-4 font-weight-bold">Live better.</h4>
+                        <p class="grey-text">Learn how to develop the habits and live the lifestyle to support your training.</p>
                     </div>
                     <!--Grid column-->
 
                     <!--Grid column-->
                     <div class="col-md-4 mb-1">
                         <i class="fa fa-bicycle fa-4x orange-text"></i>
-                        <h4 class="my-4 font-weight-bold">Adventure</h4>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
-                            assumenda deleniti hic.</p>
+                        <h4 class="my-4 font-weight-bold">Compete better.</h4>
+                        <p class="grey-text">Have peace of mind on the game day, knowing you are prepared and ready to compete at your best.</p>
                     </div>
                     <!--Grid column-->
 
@@ -194,7 +191,22 @@
                     <div class="col-lg-4 col-md-12 mb-4">
 
                         <div class="view overlay z-depth-1-half">
-                            <img src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg" class="img-fluid" alt="">
+                            <img src="https://source.unsplash.com/1600x900/?muscle" class="img-fluid" alt="">
+                            <div class="mask rgba-white-slight"></div>
+                        </div>
+
+                        <h4 class="my-4 font-weight-bold">Get a lean body</h4>
+                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
+                            assumenda deleniti hic.</p>
+
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4">
+
+                        <div class="view overlay z-depth-1-half">
+                            <img src="https://source.unsplash.com/1600x900/?health" class="img-fluid" alt="">
                             <div class="mask rgba-white-slight"></div>
                         </div>
 
@@ -209,26 +221,11 @@
                     <div class="col-lg-4 col-md-6 mb-4">
 
                         <div class="view overlay z-depth-1-half">
-                            <img src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" class="img-fluid" alt="">
+                            <img src="https://source.unsplash.com/1600x900/?gym" class="img-fluid" alt="">
                             <div class="mask rgba-white-slight"></div>
                         </div>
 
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
-                            assumenda deleniti hic.</p>
-
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-4 col-md-6 mb-4">
-
-                        <div class="view overlay z-depth-1-half">
-                            <img src="https://mdbootstrap.com/img/Photos/Others/images/29.jpg" class="img-fluid" alt="">
-                            <div class="mask rgba-white-slight"></div>
-                        </div>
-
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
+                        <h4 class="my-4 font-weight-bold">Gain faster</h4>
                         <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
                             assumenda deleniti hic.</p>
 
@@ -553,8 +550,7 @@
 
         <!--Copyright-->
         <div class="footer-copyright py-3 text-center">
-            © 2018 Copyright:
-            <a href="https://mdbootstrap.com/bootstrap-tutorial/"> MDBootstrap.com </a>
+            © 2018 Fitness Path: By Bonifase </a>
         </div>
         <!--/.Copyright-->
 
