@@ -1,3 +1,3 @@
-# Workout Path
+# Fitness Plan 
 
-A python app
+#### Tis app is accessible here [Demo](https://online-fitness-plan.herokuapp.com/)
