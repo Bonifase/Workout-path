@@ -1,90 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <title>My Workouts</title>
-
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.11/css/mdb.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  </head>
-<!-- NAVBAR
-================================================== -->
-  <body>
-       <!--Main Navigation-->
-    <header>
-
-        <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-            <div class="container">
-
-                <!-- Navbar brand -->
-                <a class="navbar-brand" href="#">Fitness Path</a>
-
-                <!-- Collapse button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Collapsible content -->
-                <div class="collapse navbar-collapse" id="basicExampleNav">
-
-                    <!-- Links -->
-                    <ul class="navbar-nav mr-auto smooth-scroll">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#intro">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#best-features">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#examples">Examples</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#gallery">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                    <!-- Links -->
-
-                    <!-- Social Icon  -->
-                    <ul class="navbar-nav nav-flex-icons">
-                        <li class="nav-item">
-                            <a class="nav-link"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link"><i class="fa fa-instagram"></i></a>
-                        </li>
-                    </ul>
-
-                </div>
-                <!-- Collapsible content -->
-
-            </div>
-        </nav>
-        <!--/.Navbar-->
+{% extends "layout.html" %}
+{% block content %}
 
         <!--Mask-->
-        <div id="intro" class="view" background="{{ url_for('static', filename='img/showcase.jpg') }}">
+        <div id="intro">
+            
 
             <div class="mask rgba-black-strong">
 
@@ -95,14 +14,14 @@
                         <div class="col-md-10">
 
                             <!-- Heading -->
-                            <h2 class="display-4 font-weight-bold white-text pt-5 mb-2">Travel</h2>
+                            <h2 class="display-4 font-weight-bold white-text pt-5 mb-2">Fitness Path</h2>
 
                             <!-- Divider -->
                             <hr class="hr-light">
 
                             <!-- Description -->
-                            <h4 class="white-text my-4">Welcome to workout Path.</h4>
-                            <button type="button" class="btn btn-outline-white">Read more<i class="fa fa-book ml-2"></i></button>
+                            <h4 class="white-text my-4">Set up your workout plan today.</h4>
+                            <button type="button" class="btn btn-outline-white">Get Started<i class="fa fa-book ml-2"></i></button>
 
                         </div>
 
@@ -111,7 +30,7 @@
                 </div>
 
             </div>
-
+        
         </div>
         <!--/.Mask-->
 
@@ -196,8 +115,7 @@
                         </div>
 
                         <h4 class="my-4 font-weight-bold">Get a lean body</h4>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
-                            assumenda deleniti hic.</p>
+                        <p class="grey-text">Get that summer body you always want.</p>
 
                     </div>
                     <!--Grid column-->
@@ -210,9 +128,8 @@
                             <div class="mask rgba-white-slight"></div>
                         </div>
 
-                        <h4 class="my-4 font-weight-bold">Heading</h4>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
-                            assumenda deleniti hic.</p>
+                        <h4 class="my-4 font-weight-bold">Improve Your Health</h4>
+                        <p class="grey-text">Get rid of clumsy body and improve your general Health.</p>
 
                     </div>
                     <!--Grid column-->
@@ -226,8 +143,7 @@
                         </div>
 
                         <h4 class="my-4 font-weight-bold">Gain faster</h4>
-                        <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima
-                            assumenda deleniti hic.</p>
+                        <p class="grey-text">Experience a complete body transformation within 21 days</p>
 
                     </div>
                     <!--Grid column-->
@@ -470,101 +386,91 @@
             </div>
         </div>
         <!-- Social buttons -->
-
         <!--Footer Links-->
         <div class="container mt-5 mb-4 text-center text-md-left">
-            <div class="row mt-3">
-
-                <!--First column-->
-                <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <strong>Workouts</strong>
-                    </h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>Here you can view all our Products.</p>
+                <div class="row mt-3">
+    
+                    <!--First column-->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <strong>Workouts</strong>
+                        </h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>Here you can view all our Products.</p>
+                    </div>
+                    <!--/.First column-->
+    
+                    <!--Second column-->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <strong>Products</strong>
+                        </h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            <a href="#!">Training Kits</a>
+                        </p>
+                        <p>
+                            <a href="#!">Boost Your Power</a>
+                        </p>
+                        <p>
+                            <a href="#!">Get a lean body</a>
+                        </p>
+                        <p>
+                            <a href="#!">Manage your diet</a>
+                        </p>
+                    </div>
+                    <!--/.Second column-->
+    
+                    <!--Third column-->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <strong>Useful links</strong>
+                        </h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            <a href="#!">Your Account</a>
+                        </p>
+                        <p>
+                            <a href="#!">Become an Affiliate</a>
+                        </p>
+                        <p>
+                            <a href="#!">Training Rates</a>
+                        </p>
+                        <p>
+                            <a href="#!">Help</a>
+                        </p>
+                    </div>
+                    <!--/.Third column-->
+    
+                    <!--Fourth column-->
+                    <div class="col-md-4 col-lg-3 col-xl-3">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <strong>Contact</strong>
+                        </h6>
+                        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                        <p>
+                            <i class="fa fa-home mr-3"></i> Naorobi, Nrb 01000, KE</p>
+                        <p>
+                            <i class="fa fa-envelope mr-3"></i> info@workouts.com</p>
+                        <p>
+                            <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+                        <p>
+                            <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+                    </div>
+                    <!--/.Fourth column-->
+    
                 </div>
-                <!--/.First column-->
-
-                <!--Second column-->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <strong>Products</strong>
-                    </h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>
-                        <a href="#!">Training Kits</a>
-                    </p>
-                    <p>
-                        <a href="#!">Boost Your Power</a>
-                    </p>
-                    <p>
-                        <a href="#!">Get a lean body</a>
-                    </p>
-                    <p>
-                        <a href="#!">Manage your diet</a>
-                    </p>
-                </div>
-                <!--/.Second column-->
-
-                <!--Third column-->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <strong>Useful links</strong>
-                    </h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>
-                        <a href="#!">Your Account</a>
-                    </p>
-                    <p>
-                        <a href="#!">Become an Affiliate</a>
-                    </p>
-                    <p>
-                        <a href="#!">Training Rates</a>
-                    </p>
-                    <p>
-                        <a href="#!">Help</a>
-                    </p>
-                </div>
-                <!--/.Third column-->
-
-                <!--Fourth column-->
-                <div class="col-md-4 col-lg-3 col-xl-3">
-                    <h6 class="text-uppercase font-weight-bold">
-                        <strong>Contact</strong>
-                    </h6>
-                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                    <p>
-                        <i class="fa fa-home mr-3"></i> Naorobi, Nrb 01000, KE</p>
-                    <p>
-                        <i class="fa fa-envelope mr-3"></i> info@workouts.com</p>
-                    <p>
-                        <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
-                    <p>
-                        <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
-                </div>
-                <!--/.Fourth column-->
-
             </div>
-        </div>
-        <!--/.Footer Links-->
-
-        <!--Copyright-->
-        <div class="footer-copyright py-3 text-center">
-            © 2018 Fitness Path: By Bonifase </a>
-        </div>
-        <!--/.Copyright-->
-
-    </footer>
-    <!--/.Footer-->
-
-    <!-- JQuery -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.11/js/mdb.min.js"></script>
-
-  </body>
-</html>
+            <!--/.Footer Links-->
+    
+            <!--Copyright-->
+            <div class="footer-copyright py-3 text-center">
+                © 2018 Fitness Path: By Bonifase </a>
+            </div>
+            <!--/.Copyright-->
+    
+        </footer>
+        <!--/.Footer-->
+    
+{% endblock content %}
+        
