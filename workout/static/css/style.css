@@ -30,7 +30,7 @@ body {
   background-color: #0f1849 !important;
 }
 .navbar:not(.top-nav-collapse) {
-  background: transparent !important;
+  background: #25262c !important;
 }
 @media (max-width: 768px) {
   .navbar:not(.top-nav-collapse) {
@@ -104,4 +104,13 @@ header,
   .navbar:not(.top-nav-collapse) {
       background: #3f51b5!important;
   }
+}
+/* signup form */
+.card {
+  background-color: rgba(255, 255, 255, 0.85);
+  margin-top: 90px;
+}
+
+h6 {
+  line-height: 1.7;
 }
