@@ -20,7 +20,7 @@ def create_user():
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
     new_user = User(
-        first_name=data['first_name'], last_name=data['last_name'], password=hashed_password, admin=False, units=data['units'])  # noqa
+        first_name=data['first_name'], last_name=data['last_name'], password=hashed_password, email=data['email'], admin=False, units=data['units'])  # noqa
     db.session.add(new_user)
     db.session.commit()
     return jsonify({'message': new_user.first_name + ' created'})

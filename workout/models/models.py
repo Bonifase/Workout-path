@@ -16,6 +16,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(20))
+    email = db.Column(db.String(60))
     password = db.Column(db.String(100))
     admin = db.Column(db.Boolean)
     units = db.Column(db.String(3))
