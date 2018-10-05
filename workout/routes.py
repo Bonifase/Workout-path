@@ -23,7 +23,7 @@ def create_user():
         first_name=data['first_name'], last_name=data['last_name'], password=hashed_password, admin=False, units=data['units'])  # noqa
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({'message': new_user.first_name +' created'})
+    return jsonify({'message': new_user.first_name + ' created'})
 
 
 @app.route("/user/<user_id>", methods=['PUT'])

@@ -12,19 +12,20 @@ manager.add_command('db', MigrateCommand)
 
 
 class User(db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(20))
     password = db.Column(db.String(100))
     admin = db.Column(db.Boolean)
     units = db.Column(db.String(3))
-    workouts = db.relationship('Workout', backref='user', lazy='dynamic')
+    workouts = db.relationship('Workout', backref='users', lazy='dynamic')
 
 
 class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     notes = db.Column(db.Text)
     bodyweight = db.Column(db.Numeric)
     exercises = db.relationship('Exercise', backref='workout', lazy='dynamic')
