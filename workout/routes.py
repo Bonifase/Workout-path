@@ -6,7 +6,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route("/user", methods=['GET'])
 def get_users():
-    return ''
+    users = User.query.all()
+    output = []
+    for user in users:
+        user_data = {}
+        user_data['_id'] = user.id
+        user_data['first_name'] = user.first_name
+        user_data['last_name'] = user.last_name
+        user_data['email'] = user.email
+        user_data['units'] = user.units
+        user_data['admin'] = user.admin
+        output.append(user_data)
+    return jsonify({'users': output})
 
 
 @app.route("/user/<user_id>", methods=['GET'])
