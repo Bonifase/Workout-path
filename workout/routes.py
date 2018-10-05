@@ -69,5 +69,11 @@ def promote_user(user_id):
 
 
 @app.route("/user/<user_id>", methods=['DELETE'])
-def delete_user():
-    return ''
+def delete_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+
+    if not user:
+        return jsonify({'message': 'User not found'})
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({'message': user.first_name + ' has heen deleted'})
