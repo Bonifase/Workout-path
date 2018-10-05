@@ -21,7 +21,18 @@ def get_users():
 
 
 @app.route("/user/<user_id>", methods=['GET'])
-def get_user():
+def get_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if not user:
+        return jsonify({'message': 'User not found'})
+    user_data = {}
+    user_data['_id'] = user.id
+    user_data['first_name'] = user.first_name
+    user_data['last_name'] = user.last_name
+    user_data['email'] = user.email
+    user_data['units'] = user.units
+    user_data['admin'] = user.admin
+    return jsonify({'users': user_data})
     return ''
 
 
