@@ -1,59 +1,56 @@
 {% extends "layout.html" %}
 {% block content %}
-<!--Header-->
 
-        <div class="login h-100 d-flex justify-content-center align-items-center">
-          <div class="container">
-              <div class="row">
-                  <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
-                      
-                      <div class="login">
-                      <!--Form with header-->
-                      <div class="card wow fadeIn" data-wow-delay="0.3s">
-                          <div class="card-body">
+                <form  action="mysuperscript.php" autocomplete="on"> 
+                    <h1>Log in</h1> 
+                    <p> 
+                        <label for="username" class="uname" data-icon="u" > Your email or username </label>
+                        <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+                    </p>
+                    <p> 
+                        <label for="password" class="youpasswd" data-icon="p"> Your password </label>
+                        <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                    </p>
+                    <p class="keeplogin"> 
+                        <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
+                        <label for="loginkeeping">Keep me logged in</label>
+                    </p>
+                    <p class="login button"> 
+                        <input type="submit" value="Login" /> 
+                    </p>
+                    <p class="change_link">
+                        Not a member yet ?
+                        <a href="#toregister" class="to_register">Join us</a>
+                    </p>
+                </form>
+            </div>
 
-                              <!--Header-->
-                              <div class="form-header purple-gradient">
-                                  <h3><i class="fa fa-user mt-2 mb-2"></i> Log in:</h3>
-                              </div>
-
-                              <!--Body-->
-                              <div class="md-form">
-                                  <i class="fa fa-user prefix white-text"></i>
-                                  <input type="text" id="orangeForm-name" class="form-control">
-                                  <label for="orangeForm-name">Your name</label>
-                              </div>
-                              <div class="md-form">
-                                  <i class="fa fa-envelope prefix white-text"></i>
-                                  <input type="text" id="orangeForm-email" class="form-control">
-                                  <label for="orangeForm-email">Your email</label>
-                              </div>
-
-                              <div class="md-form">
-                                  <i class="fa fa-lock prefix white-text"></i>
-                                  <input type="password" id="orangeForm-pass" class="form-control">
-                                  <label for="orangeForm-pass">Your password</label>
-                              </div>
-
-                              <div class="text-center">
-                                  <button class="btn purple-gradient btn-lg">Sign up</button>
-                                  <hr>
-                                  <div class="inline-ul text-center d-flex justify-content-center">
-                                      <a class="p-2 m-2 fa-lg tw-ic"><i class="fa fa-twitter white-text"></i></a>
-                                      <a class="p-2 m-2 fa-lg li-ic"><i class="fa fa-linkedin white-text"> </i></a>
-                                      <a class="p-2 m-2 fa-lg ins-ic"><i class="fa fa-instagram white-text"> </i></a>
-                                  </div>
-                              </div>
-
-                          </div>
-                      </div>
-                      <!--/Form with header-->
-                    </div>
-
-                  </div>
-              </div>
-          </div>
-        </div>
-<!--/Form with header-->
-
+            <div id="register" class="animate form">
+                <form  action="mysuperscript.php" autocomplete="on"> 
+                    <h1> Sign up </h1> 
+                    <p> 
+                        <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
+                        <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                    </p>
+                    <p> 
+                        <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
+                        <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                    </p>
+                    <p> 
+                        <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
+                        <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                    </p>
+                    <p> 
+                        <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
+                        <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                    </p>
+                    <p class="signin button"> 
+                        <input type="submit" value="Sign up"/> 
+                    </p>
+                    <p class="change_link">  
+                        Already a member ?
+                        <a href="#tologin" class="to_register"> Go and log in </a>
+                    </p>
+                </form>
+          
       {% endblock content %}
