@@ -15,7 +15,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(20))
-    password_hash = db.Column(db.Unicode(100))
+    password = db.Column(db.String(100))
+    admin = db.Column(db.Boolean)
     units = db.Column(db.String(3))
     workouts = db.relationship('Workout', backref='user', lazy='dynamic')
 
