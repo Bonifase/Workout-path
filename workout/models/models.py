@@ -13,7 +13,8 @@ manager.add_command('db', MigrateCommand)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20))
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
     password_hash = db.Column(db.Unicode(100))
     units = db.Column(db.String(3))
     workouts = db.relationship('Workout', backref='user', lazy='dynamic')
@@ -31,6 +32,7 @@ class Workout(db.Model):
 class Exercises(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
+    description = db.Column(db.String(50))
     exercise = db.relationship('Exercise', backref='exercise', lazy='dynamic')
 
 
