@@ -6,7 +6,7 @@ from workout.models.models import *
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     JWTManager, jwt_required, get_jwt_identity,
-    create_access_token,  decode_token
+    create_access_token,  decode_token, get_raw_jwt
 )
 
 
@@ -123,6 +123,14 @@ def login():
                     'message': 'You logged in successfully.'
                 }
             return jsonify(response), 200
-    
+
     return jsonify({'message': 'Wrong Password'})
 
+
+@app.route("/logout", methods=['POST'])
+@jwt_required
+def logout():
+    jti = get_raw_jwt()['jti']
+    blacklist.add(jti)
+    return jsonify({"message": "Logout Successful", }), 200
+    
