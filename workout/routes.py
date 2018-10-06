@@ -1,7 +1,25 @@
-from flask import request, jsonify
+from flask import request, jsonify, make_response
+import jwt
+import datetime
 from workout import app
 from workout.models.models import *
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import (
+    JWTManager, jwt_required, get_jwt_identity,
+    create_access_token,  decode_token
+)
+
+
+jwt = JWTManager(app)
+
+blacklist = set()
+stored_reset_tokens = set()
+
+
+@jwt.token_in_blacklist_loader
+def check_if_token_in_blacklist(decrypted_token):
+    jti = decrypted_token['jti']
+    return jti in blacklist
 
 
 @app.route("/user", methods=['GET'])
@@ -77,3 +95,34 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return jsonify({'message': user.first_name + ' has heen deleted'})
+
+
+@app.route("/login", methods=['POST'])
+def login():
+
+    data = request.get_json()
+
+    if not data or not data.get('email') or not data.get('password'):
+        return jsonify({'message': 'Provide login data'})
+
+    user = User.query.filter_by(email=data.get('email')).first()
+
+    if not user:
+        return jsonify({'message': 'User not found'})
+
+    if check_password_hash(user.password, data.get('password')):
+        access_token = create_access_token(
+                identity=user.id, expires_delta=datetime.timedelta(minutes=60))
+        if access_token:
+            response = {
+                    'access_token': access_token,
+                    'frist_name': user.first_name,
+                    'last_name': user.last_name,
+                    'admin': user.admin,
+                    'userId': user.id,
+                    'message': 'You logged in successfully.'
+                }
+            return jsonify(response), 200
+    
+    return jsonify({'message': 'Wrong Password'})
+
