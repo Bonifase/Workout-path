@@ -133,4 +133,16 @@ def logout():
     jti = get_raw_jwt()['jti']
     blacklist.add(jti)
     return jsonify({"message": "Logout Successful", }), 200
-    
+
+
+@app.route("/reset_password", methods=['POST'])
+def reset_password():
+    data = request.get_json()
+
+    if not data or not data.get('email'):
+        return jsonify({'message': 'Provide your email'})
+
+    user = User.query.filter_by(email=data.get('email')).first()
+
+    if not user:
+        return jsonify({'message': 'User not registered yet. Please register'})
