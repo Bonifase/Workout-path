@@ -166,7 +166,7 @@ def get_exercises():
             "_id": exercise.id,
             "name": exercise.name,
             "exercise": exercise.exercise,
-            "description": exercise.description} for exercise in Exercises.get_exercises()]
+            "description": exercise.description} for exercise in Exercises.get_exercises()]  # noqa
 
     if exercises == []:
         return jsonify({"message": "No Exercises"}), 404
