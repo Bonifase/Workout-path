@@ -155,4 +155,20 @@ def reset_password():
 
 @app.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
-    pass
+    data = request.get_json()
+    return jsonify({'dada': data})
+
+
+@app.route("/exercise", methods=['GET'])
+def get_exercises():
+    exercises = [
+        {
+            "_id": exercise.id,
+            "name": exercise.name,
+            "exercise": exercise.exercise,
+            "description": exercise.description} for exercise in Exercises.get_exercises()]
+
+    if exercises == []:
+        return jsonify({"message": "No Exercises"}), 404
+    else:
+        return jsonify({"message": exercises}), 200

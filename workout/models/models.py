@@ -52,6 +52,11 @@ class Exercises(db.Model):
     description = db.Column(db.String(50))
     exercise = db.relationship('Exercise', backref='exercise', lazy='dynamic')
 
+    @staticmethod
+    def get_exercises():
+        exercises = Exercises.query.all()
+        return exercises
+
 
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
