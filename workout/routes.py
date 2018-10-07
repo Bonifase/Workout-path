@@ -146,7 +146,13 @@ def reset_password():
 
     if not user:
         return jsonify({'message': 'User not registered yet. Please register'})
-    
+  
     send_reset_email(user)
+    print('I wonder', send_reset_email(user))
     return jsonify(
         {'meaasge': "Reset password link has been sent to your email"})
+
+
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    pass
