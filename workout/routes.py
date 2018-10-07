@@ -1,13 +1,13 @@
-from flask import request, jsonify, make_response
-import jwt
+from flask import request, jsonify
 import datetime
-from workout import app
-from workout.models.models import *
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     JWTManager, jwt_required, get_jwt_identity,
     create_access_token,  decode_token, get_raw_jwt
 )
+from workout import app, mail
+from workout.models.models import *
+from workout.helpers.send_email import send_reset_email
 
 
 jwt = JWTManager(app)
@@ -146,3 +146,29 @@ def reset_password():
 
     if not user:
         return jsonify({'message': 'User not registered yet. Please register'})
+  
+    send_reset_email(user)
+    print('I wonder', send_reset_email(user))
+    return jsonify(
+        {'meaasge': "Reset password link has been sent to your email"})
+
+
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    data = request.get_json()
+    return jsonify({'dada': data})
+
+
+@app.route("/exercise", methods=['GET'])
+def get_exercises():
+    exercises = [
+        {
+            "_id": exercise.id,
+            "name": exercise.name,
+            "exercise": exercise.exercise,
+            "description": exercise.description} for exercise in Exercises.get_exercises()]  # noqa
+
+    if exercises == []:
+        return jsonify({"message": "No Exercises"}), 404
+    else:
+        return jsonify({"message": exercises}), 200
