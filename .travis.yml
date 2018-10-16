@@ -13,6 +13,6 @@ services:
 before_script:
   - mysql -e 'CREATE DATABASE test.db;'
 # command to run tests
-script: nosetests --exe -v --with-coverage --cover-package=app
+script: nosetests --exe -v --with-coverage --cover-package=workout
 
 after_success: coveralls
