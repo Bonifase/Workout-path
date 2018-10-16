@@ -22,7 +22,7 @@ class TestUserCase(BaseTestSetUp):
         response = self.testHelper.login_user(user_data)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "You logged in successfully.")
-    
+  
     def test_wrong_email_login_fails(self):
         """Test API rejects wrong email during login (POST request)"""
 
@@ -36,3 +36,10 @@ class TestUserCase(BaseTestSetUp):
         response = self.testHelper.login_user(unregistered_user)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "User not found")
+
+    def test_get_all_users_works(self):
+        """Test API get all users (GET request)"""
+
+        response = self.testHelper.get_users()
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "There are no users")

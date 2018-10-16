@@ -39,6 +39,8 @@ def get_users():
         user_data['units'] = user.units
         user_data['admin'] = user.admin
         output.append(user_data)
+    if output == []:
+        return jsonify({"message": "There are no users"})
 
     return jsonify({'users': output})
 

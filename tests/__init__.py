@@ -44,3 +44,8 @@ class TestHelper():
         result = self.app.post(url, data=json.dumps(
             user_data), headers=self.headers)
         return result
+
+    def get_users(self):
+        url = self.base_url + '/api/user'
+        result = self.app.get(url)
+        return result
