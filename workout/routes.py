@@ -1,6 +1,6 @@
 from flask import request, jsonify
 import datetime
-import jwt import ExpiredSignatureError
+from jwt import ExpiredSignatureError
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
