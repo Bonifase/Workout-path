@@ -159,6 +159,19 @@ def reset_token(token):
     return jsonify({'dada': data})
 
 
+@app.route("/add_workout", methods=['POST'])
+def add_workout():
+    data = request.get_json()
+    for exercice in Exercises.query.all():
+        exercise_id = exercice.id
+    new_workout = Workout(
+        name=data['name'], notes=data['notes'], bodyweight=data['bodyweight'], user_id=data['email'], admin=False, units=data['units'])  # noqa
+
+    db.session.add(new_workout)
+    db.session.commit()
+    return jsonify({'message': new_workout.first_name + ' created'})
+
+
 @app.route("/exercise", methods=['GET'])
 def get_exercises():
     exercises = [
