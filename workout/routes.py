@@ -1,5 +1,6 @@
 from flask import request, jsonify
 import datetime
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     JWTManager, jwt_required, get_jwt_identity,
@@ -22,7 +23,7 @@ def check_if_token_in_blacklist(decrypted_token):
     return jti in blacklist
 
 
-@app.route("/user", methods=['GET'])
+@app.route("/api/user", methods=['GET'])
 def get_users():
 
     users = User.query.all()
@@ -38,17 +39,19 @@ def get_users():
         user_data['units'] = user.units
         user_data['admin'] = user.admin
         output.append(user_data)
+    if output == []:
+        return jsonify({"message": "There are no users"})
 
     return jsonify({'users': output})
 
 
-@app.route("/user/<user_id>", methods=['GET'])
+@app.route("/api/user/<user_id>", methods=['GET'])
 def get_user(user_id):
 
     user = User.query.filter_by(id=user_id).first()
 
     if not user:
-        return jsonify({'message': 'User not found'})
+        return jsonify({'message': 'User not found'}), 401
 
     user_data = {}
     user_data['_id'] = user.id
@@ -61,7 +64,7 @@ def get_user(user_id):
     return jsonify({'users': user_data})
 
 
-@app.route("/user", methods=['POST'])
+@app.route("/api/user", methods=['POST'])
 def create_user():
 
     data = request.get_json()
@@ -72,10 +75,10 @@ def create_user():
 
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({'message': new_user.first_name + ' created'})
+    return jsonify({'message': new_user.first_name + ' created'}), 201
 
 
-@app.route("/user/<user_id>", methods=['PUT'])
+@app.route("/api/user/<user_id>", methods=['PUT'])
 def promote_user(user_id):
     user = User.query.filter_by(id=user_id).first()
 
@@ -86,7 +89,7 @@ def promote_user(user_id):
     return jsonify({'message': 'The user has been promoted to Admin'})
 
 
-@app.route("/user/<user_id>", methods=['DELETE'])
+@app.route("/api/user/<user_id>", methods=['DELETE'])
 def delete_user(user_id):
     user = User.query.filter_by(id=user_id).first()
 
@@ -97,7 +100,7 @@ def delete_user(user_id):
     return jsonify({'message': user.first_name + ' has heen deleted'})
 
 
-@app.route("/login", methods=['POST'])
+@app.route("/api/login", methods=['POST'])
 def login():
 
     data = request.get_json()
@@ -127,7 +130,7 @@ def login():
     return jsonify({'message': 'Wrong Password'})
 
 
-@app.route("/logout", methods=['POST'])
+@app.route("/api/logout", methods=['POST'])
 @jwt_required
 def logout():
     jti = get_raw_jwt()['jti']
@@ -135,7 +138,7 @@ def logout():
     return jsonify({"message": "Logout Successful", }), 200
 
 
-@app.route("/reset_password", methods=['POST'])
+@app.route("/api/reset_password", methods=['POST'])
 def reset_password():
     data = request.get_json()
 
@@ -153,13 +156,28 @@ def reset_password():
         {'meaasge': "Reset password link has been sent to your email"})
 
 
-@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+@app.route("/api/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     data = request.get_json()
     return jsonify({'dada': data})
 
 
-@app.route("/exercise", methods=['GET'])
+@app.route("/api/add_workout", methods=['POST'])
+@jwt_required
+def add_workout():
+    data = request.get_json()
+    user = get_jwt_identity()
+    for exercice in Exercises.query.all():
+        exercise_id = exercice.id
+    new_workout = Workout(
+        name=data['name'], notes=data['notes'], bodyweight=data['bodyweight'], user_id=data['email'], exercise=exercise_id)  # noqa
+
+    db.session.add(new_workout)
+    db.session.commit()
+    return jsonify({'message': new_workout.first_name + ' created'})
+
+
+@app.route("/api/exercise", methods=['GET'])
 def get_exercises():
     exercises = [
         {

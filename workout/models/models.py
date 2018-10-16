@@ -45,6 +45,11 @@ class Workout(db.Model):
     bodyweight = db.Column(db.Numeric)
     exercises = db.relationship('Exercise', backref='workout', lazy='dynamic')
 
+    @staticmethod
+    def get_workouts():
+        workouts = Workout.query.all()
+        return workouts
+
 
 class Exercises(db.Model):
     id = db.Column(db.Integer, primary_key=True)
