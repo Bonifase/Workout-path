@@ -3,15 +3,16 @@ language: python
 #version
 python:
   - "3.6"
+
+env:
+ -SQLALCHEMY_DATABASE_URI=sqlite:///test.db
 # command to install dependencies
 install:
   - pip install
   - pip install -r requirements.txt
   - pip install coveralls
 services:
-  - mysql
-before_script:
-  - mysql -e 'CREATE DATABASE test;'
+  - postgresql
 # command to run tests
 script: nosetests --exe -v --with-coverage --cover-package=workout
 
