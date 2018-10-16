@@ -49,3 +49,8 @@ class TestHelper():
         url = self.base_url + '/api/user'
         result = self.app.get(url)
         return result
+
+    def get_user_by_id(self, user_id):
+        url = self.base_url + '/api/user/{id}'.format(id=user_id)
+        result = self.app.get(url)
+        return result

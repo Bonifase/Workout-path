@@ -43,3 +43,10 @@ class TestUserCase(BaseTestSetUp):
         response = self.testHelper.get_users()
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "There are no users")
+
+    def test_get_user_by_id(self):
+        """Test API get user by ID (GET request)"""
+
+        response = self.testHelper.get_user_by_id(user_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
