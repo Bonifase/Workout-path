@@ -146,7 +146,7 @@ def reset_password():
 
     if not user:
         return jsonify({'message': 'User not registered yet. Please register'})
-  
+
     send_reset_email(user)
     print('I wonder', send_reset_email(user))
     return jsonify(
