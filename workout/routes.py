@@ -160,12 +160,14 @@ def reset_token(token):
 
 
 @app.route("/add_workout", methods=['POST'])
+@jwt_required
 def add_workout():
     data = request.get_json()
+    user = get_jwt_identity()
     for exercice in Exercises.query.all():
         exercise_id = exercice.id
     new_workout = Workout(
-        name=data['name'], notes=data['notes'], bodyweight=data['bodyweight'], user_id=data['email'], admin=False, units=data['units'])  # noqa
+        name=data['name'], notes=data['notes'], bodyweight=data['bodyweight'], user_id=data['email'], exercise=exercise_id)  # noqa
 
     db.session.add(new_workout)
     db.session.commit()
