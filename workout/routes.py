@@ -1,5 +1,6 @@
 from flask import request, jsonify
 import datetime
+import jwt
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
