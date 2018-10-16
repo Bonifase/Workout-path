@@ -50,3 +50,17 @@ class TestUserCase(BaseTestSetUp):
         response = self.testHelper.get_user_by_id(user_id=1)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "User not found")
+
+    def test_change_user_role(self):
+        """Test API promotes user to admin (GET request)"""
+
+        response = self.testHelper.change_user_role(user_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
+
+    def test_delete_user(self):
+        """Test API delete user (GET request)"""
+
+        response = self.testHelper.delete_user(user_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")

@@ -54,3 +54,13 @@ class TestHelper():
         url = self.base_url + '/api/user/{id}'.format(id=user_id)
         result = self.app.get(url)
         return result
+
+    def change_user_role(self, user_id):
+        url = self.base_url + '/api/user/{id}'.format(id=user_id)
+        result = self.app.get(url)
+        return result
+
+    def delete_user(self, user_id):
+        url = self.base_url + '/api/user/{id}'.format(id=user_id)
+        result = self.app.get(url)
+        return result
