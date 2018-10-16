@@ -11,7 +11,7 @@ install:
 services:
   - mysql
 before_script:
-  - mysql -e 'CREATE DATABASE test.db;'
+  - mysql -e 'CREATE DATABASE test;'
 # command to run tests
 script: nosetests --exe -v --with-coverage --cover-package=workout
 
