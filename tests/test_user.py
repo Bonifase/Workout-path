@@ -31,7 +31,7 @@ class TestUserCase(BaseTestSetUp):
         self.assertEqual(result["message"], "User not found")
 
     def test_wrong_password_login_fails(self):
-        """Test API rejects wrong email during login (POST request)"""
+        """Test API rejects wrong password during login (POST request)"""
         self.testHelper.add_user(user_data)
         response = self.testHelper.login_user(wrong_password)
         result = json.loads(response.data.decode())
