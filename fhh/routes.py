@@ -131,7 +131,7 @@ def login():
 
 
 @app.route("/api/logout", methods=['POST'])
-@jwt_required
+# @jwt_required
 def logout():
     jti = get_raw_jwt()['jti']
     blacklist.add(jti)

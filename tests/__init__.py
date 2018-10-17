@@ -57,17 +57,15 @@ class TestHelper():
 
     def change_user_role(self, user_id):
         url = self.base_url + '/api/user/{id}'.format(id=user_id)
-        result = self.app.get(url)
+        result = self.app.put(url)
         return result
 
     def delete_user(self, user_id):
         url = self.base_url + '/api/user/{id}'.format(id=user_id)
-        result = self.app.get(url)
+        result = self.app.delete(url)
         return result
 
     def logout_user(self, token):
-        url = self.base_url + '/api/user/loout'
-        result = self.app.get(url, headers={
-                **self.headers,
-                'authorization': 'Bearer {}'.format(token)})
+        url = self.base_url + '/api/user/logout'
+        result = self.app.post()(url)
         return result
