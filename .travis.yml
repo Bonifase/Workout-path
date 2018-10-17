@@ -14,6 +14,6 @@ install:
 services:
   - postgresql
 # command to run tests
-script: nosetests --exe -v --with-coverage --cover-package=workout
+script: nosetests --exe -v --with-coverage --cover-package=fhh
 
 after_success: coveralls
