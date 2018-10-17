@@ -1,7 +1,7 @@
 import os
-from workout import mail
+from fhh import mail
 from flask import url_for
-from workout.models.models import User
+from fhh.models.models import User
 from flask_mail import Message
 
 sender = os.environ.get('EMAIL_USER')
