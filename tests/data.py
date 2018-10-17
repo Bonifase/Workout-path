@@ -19,3 +19,10 @@ unregistered_user = dict(
     email="notregistered@email.com",
     username="someuser",
     password="someuser123")
+
+wrong_password = dict(
+    first_name="Bill",
+    last_name="Bill",
+    units="65kg",
+    email="bill@gmail.com",
+    password="123")
