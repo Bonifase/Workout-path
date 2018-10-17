@@ -22,11 +22,18 @@ class TestUserCase(BaseTestSetUp):
         response = self.testHelper.login_user(user_data)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "You logged in successfully.")
-  
+
     def test_wrong_email_login_fails(self):
         """Test API rejects wrong email during login (POST request)"""
-
+        self.testHelper.add_user(user_data)
         response = self.testHelper.login_user(wrong_email)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
+
+    def test_wrong_password_login_fails(self):
+        """Test API rejects wrong password during login (POST request)"""
+        self.testHelper.add_user(user_data)
+        response = self.testHelper.login_user(wrong_password)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "User not found")
 
@@ -48,5 +55,28 @@ class TestUserCase(BaseTestSetUp):
         """Test API get user by ID (GET request)"""
 
         response = self.testHelper.get_user_by_id(user_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
+
+    def test_change_user_role(self):
+        """Test API promotes user to admin (PUT request)"""
+
+        response = self.testHelper.change_user_role(user_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
+
+    def test_delete_user(self):
+        """Test API delete user (DELETE request)"""
+
+        response = self.testHelper.delete_user(user_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
+
+    def test_logout_user(self):
+        """Test API logout user (POST request)"""
+        self.testHelper.add_user(user_data)
+        self.result = self.testHelper.login_user(user_data)
+        self.token = json.loads(self.result.data.decode())['access_token']
+        response = self.testHelper.logout_user(token=self.token)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "User not found")
