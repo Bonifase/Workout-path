@@ -1,10 +1,10 @@
 import unittest
 import json
 from urllib.parse import urljoin
-from workout import app
+from fhh import app
 from config import app_config
 
-from workout.models.models import *
+from fhh.models.models import *
 
 
 class BaseTestSetUp(unittest.TestCase):

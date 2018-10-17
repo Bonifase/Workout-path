@@ -6,9 +6,9 @@ from flask_jwt_extended import (
     JWTManager, jwt_required, get_jwt_identity,
     create_access_token,  decode_token, get_raw_jwt
 )
-from workout import app, mail
-from workout.models.models import *
-from workout.helpers.send_email import send_reset_email
+from fhh import app, mail
+from fhh.models.models import *
+from fhh.helpers.send_email import send_reset_email
 
 
 jwt = JWTManager(app)
@@ -36,7 +36,6 @@ def get_users():
         user_data['first_name'] = user.first_name
         user_data['last_name'] = user.last_name
         user_data['email'] = user.email
-        user_data['units'] = user.units
         user_data['admin'] = user.admin
         output.append(user_data)
     if output == []:
@@ -58,7 +57,6 @@ def get_user(user_id):
     user_data['first_name'] = user.first_name
     user_data['last_name'] = user.last_name
     user_data['email'] = user.email
-    user_data['units'] = user.units
     user_data['admin'] = user.admin
 
     return jsonify({'users': user_data})
@@ -71,7 +69,7 @@ def create_user():
 
     hashed_password = generate_password_hash(data['password'], method='sha256')
     new_user = User(
-        first_name=data['first_name'], last_name=data['last_name'], password=hashed_password, email=data['email'], admin=False, units=data['units'])  # noqa
+        first_name=data['first_name'], last_name=data['last_name'], password=hashed_password, email=data['email'], admin=False)  # noqa
 
     db.session.add(new_user)
     db.session.commit()
@@ -131,7 +129,7 @@ def login():
 
 
 @app.route("/api/logout", methods=['POST'])
-# @jwt_required
+@jwt_required
 def logout():
     jti = get_raw_jwt()['jti']
     blacklist.add(jti)
@@ -162,31 +160,3 @@ def reset_token(token):
     return jsonify({'dada': data})
 
 
-@app.route("/api/add_workout", methods=['POST'])
-@jwt_required
-def add_workout():
-    data = request.get_json()
-    user = get_jwt_identity()
-    for exercice in Exercises.query.all():
-        exercise_id = exercice.id
-    new_workout = Workout(
-        name=data['name'], notes=data['notes'], bodyweight=data['bodyweight'], user_id=data['email'], exercise=exercise_id)  # noqa
-
-    db.session.add(new_workout)
-    db.session.commit()
-    return jsonify({'message': new_workout.first_name + ' created'})
-
-
-@app.route("/api/exercise", methods=['GET'])
-def get_exercises():
-    exercises = [
-        {
-            "_id": exercise.id,
-            "name": exercise.name,
-            "exercise": exercise.exercise,
-            "description": exercise.description} for exercise in Exercises.get_exercises()]  # noqa
-
-    if exercises == []:
-        return jsonify({"message": "No Exercises"}), 404
-    else:
-        return jsonify({"message": exercises}), 200
