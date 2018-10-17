@@ -64,3 +64,10 @@ class TestHelper():
         url = self.base_url + '/api/user/{id}'.format(id=user_id)
         result = self.app.get(url)
         return result
+
+    def logout_user(self, token):
+        url = self.base_url + '/api/user/loout'
+        result = self.app.get(url, headers={
+                **self.headers,
+                'authorization': 'Bearer {}'.format(token)})
+        return result

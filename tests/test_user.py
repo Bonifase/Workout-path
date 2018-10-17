@@ -71,3 +71,12 @@ class TestUserCase(BaseTestSetUp):
         response = self.testHelper.delete_user(user_id=1)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "User not found")
+
+    def test_logout_user(self):
+        """Test API logout user (POST request)"""
+        self.testHelper.add_user(user_data)
+        self.result = self.testHelper.login_user(user_data)
+        self.token = json.loads(self.result.data.decode())['access_token']
+        response = self.testHelper.logout_user(token=self.token)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
