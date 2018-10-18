@@ -67,10 +67,15 @@ class TestHelper():
 
     def update_profile(self, user_id):
         url = self.base_url + '/api/user/{id}'.format(id=user_id)
-        result = self.app.delete(url)
+        result = self.app.put(url)
         return result
 
     def logout_user(self, token):
         url = self.base_url + '/api/user/logout'
         result = self.app.post()(url)
+        return result
+
+    def get_locations(self):
+        url = self.base_url + '/api/location'
+        result = self.app.get(url)
         return result
