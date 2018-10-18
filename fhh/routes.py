@@ -161,3 +161,15 @@ def reset_token(token):
     data = request.get_json()
     return jsonify({'dada': data})
 
+
+@app.route("/api/location", methods=['GET'])
+def all_locations():
+    locations = [{
+        "location_name": location.name,
+        "country": location.country,
+        "desrciption": location.desrciption
+    } for location in Location.get_locations()]
+
+    if locations == []:
+        return jsonify({'message': "No locations"})
+    return jsonify({"locations": locations})

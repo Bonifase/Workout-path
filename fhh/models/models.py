@@ -48,7 +48,7 @@ class Location(db.Model):
     desrciption = db.Column(db.String(60))
 
     @staticmethod
-    def get_locations(token):
+    def get_locations():
         locations = Location.query.all()
         return locations
 
