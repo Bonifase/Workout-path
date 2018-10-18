@@ -25,6 +25,7 @@ class TestUserCase(BaseTestSetUp):
 
     def test_wrong_email_login_fails(self):
         """Test API rejects wrong email during login (POST request)"""
+        add_user = self.testHelper.add_user(new_user)
         self.testHelper.add_user(user_data)
         response = self.testHelper.login_user(wrong_email)
         result = json.loads(response.data.decode())
@@ -32,14 +33,15 @@ class TestUserCase(BaseTestSetUp):
 
     def test_wrong_password_login_fails(self):
         """Test API rejects wrong password during login (POST request)"""
+        add_user = self.testHelper.add_user(new_user)
         self.testHelper.add_user(user_data)
         response = self.testHelper.login_user(wrong_password)
         result = json.loads(response.data.decode())
-        self.assertEqual(result["message"], "User not found")
+        self.assertEqual(result["message"], "Wrong Password")
 
     def test_unregistered_user_login_fails(self):
         """Test API rejects unregistered users login (POST request)"""
-
+        add_user = self.testHelper.add_user(new_user)
         response = self.testHelper.login_user(unregistered_user)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "User not found")
