@@ -77,11 +77,13 @@ def create_user():
 
 
 @app.route("/api/user/<user_id>", methods=['PUT'])
-def promote_user(user_id):
+def update_profile(user_id):
+    data = request.get_json()
     user = User.query.filter_by(id=user_id).first()
 
     if not user:
         return jsonify({'message': 'User not found'})
+    user.location, user.y_o_b = data['location'], data['y_o_b']
     user.admin = True
     db.session.commit()
     return jsonify({'message': 'The user has been promoted to Admin'})
@@ -159,4 +161,34 @@ def reset_token(token):
     data = request.get_json()
     return jsonify({'dada': data})
 
+
+@app.route("/api/location", methods=['GET'])
+def all_locations():
+    locations = [{
+        "location_name": location.name,
+        "country": location.country,
+        "desrciption": location.desrciption
+    } for location in Location.get_locations()]
+
+    if locations == []:
+        return jsonify({'message': "No locations"})
+    return jsonify({"locations": locations})
+
+
+@app.route("/api/location", methods=['POST'])
+def new_location():
+    data = request.get_json()
+    location = Location.query.filter_by(name=data.get('name')).first()
+
+    if location:
+        return jsonify({'message': "Location already exist"})
+
+    new_location = Location(
+        name=data['name'],
+        country=data['country'],
+        description=data['description'])
+    db.session.add(new_location)
+    db.session.commit()
+    return jsonify({'message': new_location.name + ' created'}), 201
+    
 

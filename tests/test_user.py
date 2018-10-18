@@ -72,4 +72,11 @@ class TestUserCase(BaseTestSetUp):
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "User not found")
 
+    def test_update_profile(self):
+        """Test API update user profile (PUT request)"""
+
+        response = self.testHelper.update_profile(user_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "User not found")
+
    
