@@ -77,11 +77,13 @@ def create_user():
 
 
 @app.route("/api/user/<user_id>", methods=['PUT'])
-def promote_user(user_id):
+def update_profile(user_id):
+    data = request.get_json()
     user = User.query.filter_by(id=user_id).first()
 
     if not user:
         return jsonify({'message': 'User not found'})
+    user.location, user.y_o_b = data['location'], data['y_o_b']
     user.admin = True
     db.session.commit()
     return jsonify({'message': 'The user has been promoted to Admin'})
@@ -158,5 +160,4 @@ def reset_password():
 def reset_token(token):
     data = request.get_json()
     return jsonify({'dada': data})
-
 
