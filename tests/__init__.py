@@ -79,3 +79,9 @@ class TestHelper():
         url = self.base_url + '/api/location'
         result = self.app.get(url)
         return result
+    
+    def add_location(self, user_data):
+        url = self.base_url + '/api/location'
+        result = self.app.post(url, data=json.dumps(
+            user_data), headers=self.headers)
+        return result

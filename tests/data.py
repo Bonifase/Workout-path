@@ -26,3 +26,8 @@ wrong_password = dict(
     units="65kg",
     email="bill@gmail.com",
     password="123")
+
+new_location = dict(
+    name="Kisumu",
+    country="Kenya",
+    description="Third bigest")

@@ -45,7 +45,7 @@ class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     country = db.Column(db.String(100))
-    desrciption = db.Column(db.String(60))
+    description = db.Column(db.String(160))
 
     @staticmethod
     def get_locations():

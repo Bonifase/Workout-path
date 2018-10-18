@@ -173,3 +173,22 @@ def all_locations():
     if locations == []:
         return jsonify({'message': "No locations"})
     return jsonify({"locations": locations})
+
+
+@app.route("/api/location", methods=['POST'])
+def new_location():
+    data = request.get_json()
+    location = Location.query.filter_by(name=data.get('name')).first()
+
+    if location:
+        return jsonify({'message': "Location already exist"})
+
+    new_location = Location(
+        name=data['name'],
+        country=data['country'],
+        description=data['description'])
+    db.session.add(new_location)
+    db.session.commit()
+    return jsonify({'message': new_location.name + ' created'}), 201
+    
+
