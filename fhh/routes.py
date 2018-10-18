@@ -59,7 +59,7 @@ def get_user(user_id):
     user_data['email'] = user.email
     user_data['admin'] = user.admin
 
-    return jsonify({'users': user_data})
+    return jsonify({'user': user_data})
 
 
 @app.route("/api/user", methods=['POST'])
