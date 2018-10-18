@@ -76,7 +76,12 @@ class TestHelper():
         return result
 
     def get_locations(self):
-        url = self.base_url + '/api/location'
+        url = self.base_url + '/api/locations'
+        result = self.app.get(url)
+        return result
+    
+    def get_location(self, location_id):
+        url = self.base_url + '/api/locations/{id}'.format(id=location_id)
         result = self.app.get(url)
         return result
     

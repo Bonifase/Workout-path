@@ -21,3 +21,10 @@ class TestUserCase(BaseTestSetUp):
         self.assertEqual(result[
             "message"], new_location['name'] + " created")
         self.assertEqual(response.status_code, 201)
+    
+    def test_get_user_by_id(self):
+        """Test API get one location (GET request)"""
+
+        response = self.testHelper.get_location(location_id=1)
+        result = json.loads(response.data.decode())
+        self.assertEqual(result["message"], "Location not found")
