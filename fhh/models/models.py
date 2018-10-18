@@ -40,5 +40,17 @@ class User(db.Model):
         return User.query.get(user_id)
 
 
+class Location(db.Model):
+    __tablename__ = 'locations'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    country = db.Column(db.String(100))
+    description = db.Column(db.String(160))
+
+    @staticmethod
+    def get_locations():
+        locations = Location.query.all()
+        return locations
+
 if __name__ == '__main__':
     manager.run()
