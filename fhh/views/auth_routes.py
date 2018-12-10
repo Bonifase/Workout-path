@@ -178,7 +178,7 @@ def location(location_id):
     return jsonify({"location": location})
 
 
-@app.route("/api/location", methods=['POST'])
+@app.route("/api/locations", methods=['POST'])
 def new_location():
     data = request.get_json()
     location = Location.query.filter_by(name=data.get('name')).first()
@@ -193,5 +193,20 @@ def new_location():
     db.session.add(new_location)
     db.session.commit()
     return jsonify({'message': new_location.name + ' created'}), 201
-    
 
+
+@app.route("/api/locations", methods=['POST'])
+def update_location():
+    data = request.get_json()
+    location = Location.query.filter_by(name=data.get('name')).first()
+
+    if location:
+        return jsonify({'message': "Location already exist"})
+
+    new_location = Location(
+        name=data['name'],
+        country=data['country'],
+        description=data['description'])
+    db.session.add(new_location)
+    db.session.commit()
+    return jsonify({'message': new_location.name + ' created'}), 201
