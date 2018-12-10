@@ -30,13 +30,13 @@ class TestUserCase(BaseTestSetUp):
         self.assertEqual(result[
             "message"], new_location['name'] + " created")
         self.assertEqual(response.status_code, 201)
-    
+   
     def test_get_location(self):
         """Test API get one location (GET request)"""
         response = self.testHelper.get_location(location_id=1)
         result = json.loads(response.data.decode())
         self.assertEqual(result["message"], "Location not found")
-    
+  
     def test_get_location_works(self):
         """Test API get one location works (GET request)"""
         add_location = self.testHelper.add_location(new_location)

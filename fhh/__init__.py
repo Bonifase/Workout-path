@@ -8,7 +8,7 @@ app = Flask(__name__)
 mail = Mail(app)
 db = SQLAlchemy(app)
 
-from fhh import routes  # noqa
+from fhh.views import auth_routes  # noqa
 
 app.config['JWT_SECRET_KEY'] = 'supersecretishere'
 app.config['JWT_BLACKLIST_ENABLED'] = True

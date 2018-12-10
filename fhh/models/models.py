@@ -54,21 +54,18 @@ class Location(db.Model):
             "country": location.country,
             "description": location.description
             } for location in Location.query.all()]
-
         return locations
 
     @staticmethod
     def get_location(location_id):
         location = Location.query.filter_by(id=location_id).first()
         location_data = {}
-
         if not location:
             return location_data
-           
         location_data['_id'] = location.id
         location_data['name'] = location.name
+        location_data['country'] = location.country,
         location_data['description'] = location.description
-
         return location_data
 
 if __name__ == '__main__':
