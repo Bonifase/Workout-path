@@ -79,14 +79,14 @@ class TestHelper():
         url = self.base_url + '/api/locations'
         result = self.app.get(url)
         return result
-  
+
     def get_location(self, location_id):
         url = self.base_url + '/api/locations/{id}'.format(id=location_id)
         result = self.app.get(url)
         return result
-    
-    def add_location(self, user_data):
-        url = self.base_url + '/api/location'
+
+    def add_location(self, new_location):
+        url = self.base_url + '/api/locations'
         result = self.app.post(url, data=json.dumps(
-            user_data), headers=self.headers)
+            new_location), headers=self.headers)
         return result

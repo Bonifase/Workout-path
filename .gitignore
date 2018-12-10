@@ -6,3 +6,4 @@ test.db
 __pycache__
 workout.db
 __init__.pyc
+*.pyc

@@ -53,7 +53,7 @@ class Location(db.Model):
             "location_name": location.name,
             "country": location.country,
             "description": location.description
-            } for location in Location.query.all()]
+        } for location in Location.query.all()]
         return locations
 
     @staticmethod
@@ -67,6 +67,7 @@ class Location(db.Model):
         location_data['country'] = location.country,
         location_data['description'] = location.description
         return location_data
+
 
 if __name__ == '__main__':
     manager.run()

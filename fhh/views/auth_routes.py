@@ -23,83 +23,6 @@ def check_if_token_in_blacklist(decrypted_token):
     return jti in blacklist
 
 
-@app.route("/api/user", methods=['GET'])
-def get_users():
-
-    users = User.query.all()
-
-    output = []
-
-    for user in users:
-        user_data = {}
-        user_data['_id'] = user.id
-        user_data['first_name'] = user.first_name
-        user_data['last_name'] = user.last_name
-        user_data['email'] = user.email
-        user_data['admin'] = user.admin
-        output.append(user_data)
-    if output == []:
-        return jsonify({"message": "There are no users"})
-
-    return jsonify({'users': output})
-
-
-@app.route("/api/user/<user_id>", methods=['GET'])
-def get_user(user_id):
-
-    user = User.query.filter_by(id=user_id).first()
-
-    if not user:
-        return jsonify({'message': 'User not found'}), 401
-
-    user_data = {}
-    user_data['_id'] = user.id
-    user_data['first_name'] = user.first_name
-    user_data['last_name'] = user.last_name
-    user_data['email'] = user.email
-    user_data['admin'] = user.admin
-
-    return jsonify({'user': user_data})
-
-
-@app.route("/api/user", methods=['POST'])
-def create_user():
-
-    data = request.get_json()
-
-    hashed_password = generate_password_hash(data['password'], method='sha256')
-    new_user = User(
-        first_name=data['first_name'], last_name=data['last_name'], password=hashed_password, email=data['email'], admin=False)  # noqa
-
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({'message': new_user.first_name + ' created'}), 201
-
-
-@app.route("/api/user/<user_id>", methods=['PUT'])
-def update_profile(user_id):
-    data = request.get_json()
-    user = User.query.filter_by(id=user_id).first()
-
-    if not user:
-        return jsonify({'message': 'User not found'})
-    user.location, user.y_o_b = data['location'], data['y_o_b']
-    user.admin = True
-    db.session.commit()
-    return jsonify({'message': 'The user has been promoted to Admin'})
-
-
-@app.route("/api/user/<user_id>", methods=['DELETE'])
-def delete_user(user_id):
-    user = User.query.filter_by(id=user_id).first()
-
-    if not user:
-        return jsonify({'message': 'User not found'})
-    db.session.delete(user)
-    db.session.commit()
-    return jsonify({'message': user.first_name + ' has heen deleted'})
-
-
 @app.route("/api/login", methods=['POST'])
 def login():
 
@@ -115,16 +38,16 @@ def login():
 
     if check_password_hash(user.password, data.get('password')):
         access_token = create_access_token(
-                identity=user.id, expires_delta=datetime.timedelta(minutes=60))
+            identity=user.id, expires_delta=datetime.timedelta(minutes=60))
         if access_token:
             response = {
-                    'access_token': access_token,
-                    'frist_name': user.first_name,
-                    'last_name': user.last_name,
-                    'admin': user.admin,
-                    'userId': user.id,
-                    'message': 'You logged in successfully.'
-                }
+                'access_token': access_token,
+                'frist_name': user.first_name,
+                'last_name': user.last_name,
+                'admin': user.admin,
+                'userId': user.id,
+                'message': 'You logged in successfully.'
+            }
             return jsonify(response), 200
 
     return jsonify({'message': 'Wrong Password'})
@@ -160,53 +83,3 @@ def reset_password():
 def reset_token(token):
     data = request.get_json()
     return jsonify({'dada': data})
-
-
-@app.route("/api/locations", methods=['GET'])
-def all_locations():
-    locations = Location.get_locations()
-    if locations == []:
-        return jsonify({'message': "No locations"})
-    return jsonify({"locations": locations})
-
-
-@app.route("/api/locations/<location_id>", methods=['GET'])
-def location(location_id):
-    location = Location.get_location(location_id)
-    if location == {}:
-        return jsonify({'message': "Location not found"})
-    return jsonify({"location": location})
-
-
-@app.route("/api/locations", methods=['POST'])
-def new_location():
-    data = request.get_json()
-    location = Location.query.filter_by(name=data.get('name')).first()
-
-    if location:
-        return jsonify({'message': "Location already exist"})
-
-    new_location = Location(
-        name=data['name'],
-        country=data['country'],
-        description=data['description'])
-    db.session.add(new_location)
-    db.session.commit()
-    return jsonify({'message': new_location.name + ' created'}), 201
-
-
-@app.route("/api/locations", methods=['POST'])
-def update_location():
-    data = request.get_json()
-    location = Location.query.filter_by(name=data.get('name')).first()
-
-    if location:
-        return jsonify({'message': "Location already exist"})
-
-    new_location = Location(
-        name=data['name'],
-        country=data['country'],
-        description=data['description'])
-    db.session.add(new_location)
-    db.session.commit()
-    return jsonify({'message': new_location.name + ' created'}), 201
