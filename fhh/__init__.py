@@ -2,9 +2,11 @@ import os
 from flask import Flask
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from config import app_config
 
 app = Flask(__name__)
+CORS(app)
 mail = Mail(app)
 db = SQLAlchemy(app)
 
