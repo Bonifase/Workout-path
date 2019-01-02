@@ -5,6 +5,7 @@ from fhh.models.models import *
 
 
 @app.route("/api/locations", methods=['GET'])
+@jwt_required
 def all_locations():
     locations = Location.get_locations()
     if locations == []:
@@ -13,6 +14,7 @@ def all_locations():
 
 
 @app.route("/api/locations/<location_id>", methods=['GET'])
+@jwt_required
 def location(location_id):
     location = Location.get_location(location_id)
     if location == {}:
@@ -21,6 +23,7 @@ def location(location_id):
 
 
 @app.route("/api/locations", methods=['POST'])
+@jwt_required
 def new_location():
     data = request.get_json()
     location = Location.query.filter_by(name=data.get('name')).first()
@@ -38,6 +41,7 @@ def new_location():
 
 
 @app.route("/api/locations", methods=['POST'])
+@jwt_required
 def update_location():
     data = request.get_json()
     location = Location.query.filter_by(name=data.get('name')).first()
@@ -52,5 +56,3 @@ def update_location():
     db.session.add(new_location)
     db.session.commit()
     return jsonify({'message': new_location.name + ' created'}), 201
-
-
