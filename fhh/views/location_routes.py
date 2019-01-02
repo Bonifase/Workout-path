@@ -1,5 +1,8 @@
 from flask import request, jsonify
-
+from flask_jwt_extended import (
+    JWTManager, jwt_required, get_jwt_identity,
+    create_access_token,  decode_token, get_raw_jwt
+)
 from fhh import app
 from fhh.models.models import *
 
