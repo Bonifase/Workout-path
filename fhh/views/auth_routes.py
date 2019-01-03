@@ -38,7 +38,7 @@ def login():
 
     if check_password_hash(user.password, data.get('password')):
         access_token = create_access_token(
-            identity=user._id, expires_delta=datetime.timedelta(minutes=60))
+            identity=user.id, expires_delta=datetime.timedelta(minutes=60))
         if access_token:
             response = {
                 'access_token': access_token,
