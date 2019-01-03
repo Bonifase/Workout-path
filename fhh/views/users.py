@@ -64,7 +64,6 @@ def create_user():
 
 
 @app.route("/api/user/<user_id>", methods=['PUT'])
-@jwt_required
 def update_profile(user_id):
     data = request.get_json()
     user = User.query.filter_by(id=user_id).first()
@@ -78,7 +77,6 @@ def update_profile(user_id):
 
 
 @app.route("/api/user/<user_id>", methods=['DELETE'])
-@jwt_required
 def delete_user(user_id):
     user = User.query.filter_by(id=user_id).first()
 
